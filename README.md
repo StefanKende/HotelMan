@@ -32,4 +32,4 @@ Az adatbázisban a következő entitásokat és attribútumokat tároljuk:
 
 A fenti adatok tárolását az alábbi sémával oldjuk meg:
 
-![hotelman schema] (./doc/hotelman-schema.png)
+![hotelmanschema] (./doc/hotelman-schema.png "schema" )
