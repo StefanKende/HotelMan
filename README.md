@@ -31,3 +31,5 @@ Az adatbázisban a következő entitásokat és attribútumokat tároljuk:
 - Foglalás: azonosító, vendég, szoba, foglalás kezdete, foglalás vége, ár
 
 A fenti adatok tárolását az alábbi sémával oldjuk meg:
+
+[hotelman schema] (doc/hotelman-schema.png)
