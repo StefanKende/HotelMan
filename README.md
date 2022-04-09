@@ -4,20 +4,21 @@ A feladat célja, egy szállodában a szobák foglalását tartalmazó adatbázi
 A cél az, hogy nyomon tudjuk követni, hogy éppen melyik szoba van szabadon, vagy éppen melyik szobában tartózkodik valaki, továbbá egy egyértelműen áttekinthető foglaltsági naptárat hozzunk létre, mely alapján a szobák rendelkezésre állása könnyen eldönthető.
 
 # Elérhető funkciók
-- Szobák kezelése:
+- Szobák kezelése (/room.php) :
     - Új szoba létrehozása
     - Meglévő szoba adatainak módosítása
     - Szoba törlése
     - Szobák listázása
-    - Foglaltsági naptár
+    - Foglaltsági naptár, egy szoba adott havi foglaltság kijelzése
+    - Szabad szoba keresése megadott dátumintervallumra
 
-- Vendégek kezelése:
+- Vendégek kezelése (/guest.php) :
     - Új vendég létrehozása
     - Meglévő vendég adatainak a módosítása
     - Vendég törlése
     - A vendégek listázása
 
-- Foglalások kezelése:
+- Foglalások kezelése (/booking.php) :
     - Új foglalás felvétele
     - Foglalás törlése
     - Foglalás módosítása
