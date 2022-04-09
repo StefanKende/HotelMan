@@ -85,10 +85,10 @@
                 <input type="checkbox" id="seaview" name="seaview" value="seaview"><label for="seaview">Tengerre néző</label><br>
                 <input type="checkbox" id="balcony" name="balcony" value="balcony"><label for="balcony">Erkélyes</label><br>
                 <p>Kategória:</p>
+                <input type="radio" id="standard" name="category"><label for="standard">Standard</label><br>
                 <input type="radio" id="deluxe" name="category"><label for="deluxe">Deluxe</label><br>
                 <input type="radio" id="premium" name="category"><label for="premium">Prémium</label><br>
                 <button type="button">Szoba létrehozása</button>
-                
             </form>
         </div>
     </body>    

@@ -25,4 +25,7 @@
 
   table,th,td {
    background-color: lightgray ;
+   border-bottom: 1px solid rgb(41, 3, 3)
   }
+
+  tr:nth-child(even) {background-color: rgb(148, 13, 13)}
