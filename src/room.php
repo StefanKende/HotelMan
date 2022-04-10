@@ -9,9 +9,6 @@
 
         <div class="main">
             <h1> Szobák </h1>  
-            <p>
-                <button type="button">Új szoba felvétele</button>
-            </p>
             <table> 
                 <tr>
                     <th>id</th>
@@ -19,7 +16,7 @@
                     <th>Ár/Nap</th>
                     <th>Férőhely</th>
                     <th>Extra</th>
-                    <th>kategória</th>
+                    <th>Kategória</th>
                     <th>Műveletek</th>
                 </tr>
                 <tr>
@@ -73,6 +70,10 @@
                 </tr>
             </table>
 
+            <p>
+                <button type="button">Új szoba felvétele</button>
+            </p>
+
             <h1>Új szoba felvétele</h1>
             <form> 
                 <label for="roomnumber">Szobaszám:</label><br>
@@ -90,6 +91,9 @@
                 <input type="radio" id="premium" name="category"><label for="premium">Prémium</label><br>
                 <button type="button">Szoba létrehozása</button>
             </form>
+
+        
+
         </div>
     </body>    
 </html>        
