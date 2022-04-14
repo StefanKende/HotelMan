@@ -9,7 +9,7 @@
 
         <div class="main">
             <h1> Foglalások </h1>
-
+            <div class="main-content">
             <table> 
                 <tr>
                     <th>id</th>
@@ -65,7 +65,7 @@
                     <td><a href="booking.php">Szerkesztés  </a> <a href="booking.php">Törlés  </a><a href="booking.php">Kijelentkezés  </a></td>
                 </tr>
             </table>
-
+        </div>
         </div>
     </body>    
 </html>        

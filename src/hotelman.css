@@ -1,3 +1,24 @@
+body {
+  font-family: helvetica, sans-serif;
+  margin: 0px;
+}
+
+h1 {
+  background-color: rgb(75, 67, 227);
+  color: #ffffff;
+  width: 100%;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.header {
+  padding: 60px;
+  text-align: center;
+  background: #1abc9c;
+  color: white;
+  font-size: 30px;
+}
+
 .sidenav {
     height: 100%;
     width: 200px;
@@ -5,22 +26,27 @@
     z-index: 1;
     top: 0;
     left: 0;
-    background-color: #111;
+    background-color: rgb(75, 67, 227);
     overflow-x: hidden;
     padding-top: 20px;
+  }
+
+  .sidenav a {
+    padding: 8px 8px 8px 8px;
+    text-decoration: none;
+    font-size: 20px;
+    color: #ffffff;
+    display: block;
+    transition: 0.3s;
+    text-transform: uppercase;
   }
 
   .main {
     margin-left: 200px;
   }
 
-  .sidenav a {
-    padding: 8px 8px 8px 32px;
-    text-decoration: none;
-    font-size: 25px;
-    color: #818181;
-    display: block;
-    transition: 0.3s;
+  .main-content {
+    padding-left: 20px;
   }
 
   table { 

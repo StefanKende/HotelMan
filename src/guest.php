@@ -9,7 +9,7 @@
          
         <div class="main">
             <h1> Vendégek </h1>
-
+            <div class="main-content">
             <table> 
                 <tr>
                     <th>id</th>
@@ -43,8 +43,8 @@
                 </tr>
             </table>
 
-
             <h1>Új vendég felvétele</h1>
+            
             <form> 
                 <label for="guestname">Vendég neve:</label><br>
                 <input type="text" id="guestname" name="guestname"> <br>
@@ -54,7 +54,7 @@
                 <input type="text" id="guestmail" name="guestmail"><br>
             </form>
             <button type=button>Új vendég felcétele</button>
-
+        </div>
         </div>
     </body>    
 </html>        

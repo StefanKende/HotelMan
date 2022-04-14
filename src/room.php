@@ -1,4 +1,4 @@
-<!DOCTYPE htlm>
+<!DOCTYPE html>
 <html>
     <head>
         <link rel="stylesheet" href="hotelman.css"> 
@@ -8,7 +8,20 @@
         <?php include 'menu.html' ?>
 
         <div class="main">
-            <h1> Szobák </h1>  
+
+            <?php
+                if ($_GET['action'] == 'list') {
+            ?>
+            <h1> Szobák </h1>
+            <div class="main-content">
+
+            <p>
+            <form action="room.php" method="post">
+                <input type="hidden" name="action" value="new">
+                <button type="submit" value="submit">Új szoba felvétele</button>
+            </form>
+            </p>
+
             <table> 
                 <tr>
                     <th>id</th>
@@ -70,11 +83,10 @@
                 </tr>
             </table>
 
-            <p>
-                <button type="button">Új szoba felvétele</button>
-            </p>
-
+               <?php } else if ($_POST['action'] == 'new') { ?>
             <h1>Új szoba felvétele</h1>
+            <div class="main-content">                
+          
             <form> 
                 <label for="roomnumber">Szobaszám:</label><br>
                 <input type="text" id="roomnr" name="roomnr"> <br>
@@ -91,9 +103,8 @@
                 <input type="radio" id="premium" name="category"><label for="premium">Prémium</label><br>
                 <button type="button">Szoba létrehozása</button>
             </form>
-
-        
-
+        </div>
+        <?php } ?>
         </div>
     </body>    
 </html>        
