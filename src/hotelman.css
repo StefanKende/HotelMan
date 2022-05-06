@@ -9,6 +9,7 @@ h1 {
   width: 100%;
   padding-top: 10px;
   padding-bottom: 10px;
+  margin-top: 0px;
 }
 
 .header {
@@ -42,6 +43,7 @@ h1 {
   }
 
   .main {
+    height: 100%;
     margin-left: 200px;
   }
 
@@ -88,3 +90,7 @@ h1 {
 
   tr:nth-child(even) {background-color: #bbbbbb;}
   tr:nth-child(odd) {background-color: #ffffff;}
+
+   .warning {
+    color:rgb(255, 0, 0);
+  }

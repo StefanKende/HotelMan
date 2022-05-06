@@ -57,7 +57,7 @@ CREATE TABLE IF NOT EXISTS `hotelman`.`booking` (
   `guest_id` INT NULL,
   `room_id` INT NULL,
   `price` INT NULL,
-  `beginning` DATE NULL,
+  `beginning` DATE NULL,x
   `end` DATE NULL,
   PRIMARY KEY (`id`),
   CONSTRAINT `fk_guest`

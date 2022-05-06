@@ -6,6 +6,7 @@
     </head>
     <body>
         <?php include 'menu.html' ?>
+        <?php include 'settings.php ' ?>
 
         <div class="main">
             <h1> Foglalások </h1>

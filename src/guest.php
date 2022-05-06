@@ -6,6 +6,7 @@
     </head>
     <body>
          <?php include 'menu.html' ?>
+         <?php include 'settings.php'?>
          
         <div class="main">
             <h1> Vendégek </h1>
@@ -53,7 +54,7 @@
                 <label for="">Vendég e-mail címe</label><br>
                 <input type="text" id="guestmail" name="guestmail"><br>
             </form>
-            <button type=button>Új vendég felcétele</button>
+            <button type=button>Új vendég felvétele</button>
         </div>
         </div>
     </body>    
