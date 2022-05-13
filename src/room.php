@@ -44,7 +44,7 @@
             for ($i=0; $row=mysqli_fetch_assoc($result); $i++) {
                 echo "<tr><td>" . $row["id"] . "</td><td>" . $row["roomnr"] . 
                 "</td><td>" . $row["price"] . "</td><td>" . $row["nr_guests"] . 
-                "</td><td>" . $row["category"] . "</td><td>" . $row["extra"] . "</td>
+                "</td><td>" . $row["extra"] . "</td><td>" . $row["category"] . "</td>
                 <td><a href=\"room.php?action=edit&id=" . $row["id"] . "\">Szerkesztés</a> <a href=\"room.php?action=delete&id=". $row["id"] . "\">Törlés </a></td></tr>";
             }
             ?>
@@ -89,6 +89,7 @@
             $balcony = false;
             $category = "";
             $extra = "";
+            $message = "";
             $seaview = isset($_POST['seaview']);
             $balcony = isset($_POST['balcony']);
             if ($seaview) $extra = "seaview";
@@ -96,7 +97,6 @@
             if (isset($_POST['roomnr'])) $roomnr = $_POST['roomnr'];
             $price = $_POST['price'];
             $nr_guests = $_POST["nr_guests"];
-           
             $category = $_POST['category'];
 
             if ($roomnr == "") {
@@ -133,8 +133,6 @@
                 $formerror = 1;
                 $message = $message . "Kategóriát kötelező megadni! <br>";
             }
-
-            $message = $message . "<br>";
 
             if ($formerror) {
                
