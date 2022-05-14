@@ -307,6 +307,7 @@
                 <input type="radio" value="standard" name="category" <?php if ($category == "standard" ) echo "checked" ?> ><label for="standard">Standard</label><br>
                 <input type="radio" value="deluxe" name="category" <?php if ($category == "deluxe" ) echo "checked" ?> ><label for="deluxe">Deluxe</label><br>
                 <input type="radio" value="premium" name="category" <?php if ($category == "premium" ) echo "checked" ?> ><label for="premium">Prémium</label><br>
+                <input type="hidden" name="roomid" value="<?php echo $roomid; ?>">
                 <input type="hidden" name="action" value="modify">
                 <button type="submit" value="submit">Szoba módosítása</button>
             </form>
