@@ -122,12 +122,12 @@ function checkIsAValidDate($myDateString){
         <label for="rooms"> Válassza ki a szobát </label>
         <select name="rooms">
         <?php 
-        $query = "select id, roomnr from room where id not in (select room_id from booking where (beginning<='". $_POST['beginning'] .
-        "' AND end>" . $_POST['beginning'] . ") OR (beginning>'". $_POST['end'] . 
-        "' AND end<='". $_POST['end'] . "'))";
-        $result = mysqli_query($link,$query) or die(mysqli_error(link));
+        $query = "select id, roomnr from room where id not in (select room_id from booking where ('". $_POST['beginning'] . "' >= beginning 
+        AND '". $_POST['beginning'] . "'< end ) OR ('". $_POST['end'] . "' > beginning
+        AND '" . $_POST['end'] . "'<=end))";
+        $result = mysqli_query($link,$query) or die(mysqli_error($link));
         for ($i=0; $row=mysqli_fetch_assoc($result); $i++) {
-            echo"<option value=\"". $row['id'] . "\">". $row['roomnr'] . "</option>";
+            echo"<option value=\"". $row['id'] . "\">". $row['roomnr'] . "</option> \n";
             }
             ?>
         </select> <br>
@@ -160,9 +160,121 @@ function checkIsAValidDate($myDateString){
             header('Location: http://' . $_SERVER['SERVER_NAME'] . '/hotelman/booking.php?action=list');
             ?>
             
-        <?php } else if (isset($_GET['action']) && $_GET['action'] == 'edit') {?>
-        <?php } else if (isset($_GET['action']) && $_GET['action'] == 'edit2') {?>
-        <?php } else if (isset($_GET['action']) && $_GET['action'] == 'modify') {?>
+        <?php } 
+        //===================================================================
+        // Foglalás módosítása
+        //=================================================================== 
+        else if (isset($_GET['action']) && $_GET['action'] == 'edit') {?>
+
+            <h1>Foglalás módosítása</h1>
+            <div class="main-content">
+            <?php if (!isset($_GET["id"])) {
+                echo "A foglalás azonosítóját kötelező megadni!";
+                exit;
+            }
+            $bookingid = $_GET["id"];
+            $query = "select * from booking where id =" . $bookingid;
+
+            $result = mysqli_query($link,$query);
+            $nrrec = mysqli_num_rows($result);
+
+            if ($nrrec == 0) {
+                echo $bookingid. " azonosítóval nem létezik foglalás az adatbázisban.";
+                exit;
+            }
+
+            $row = mysqli_fetch_assoc($result);
+            $guestid=$row["guest_id"];
+            $beginning = $row["beginning"];
+            $end = $row["end"];
+
+            ?>
+            
+            <form action="booking.php" method="post"> 
+                <label for="beginning">A foglalás kezdete</label><br> 
+                <input type="text" name="beginning" value="<?php echo $beginning; ?>"> <br>
+                <label for="end"></label>A foglalás vége<br>
+                <input type="text" name="end" value="<?php echo $end; ?>"><br>
+                <input type=hidden name="action" value="edit2">
+                <input type=hidden name="guestid" value=<?php echo $guestid; ?>>
+                <input type=hidden name="bookingid" value=<?php echo $bookingid; ?>>
+                <button type="submit" value="submit">Tovább</button>
+            </form> 
+            </div>
+
+        <?php } else if (isset($_POST['action']) && $_POST['action'] == 'edit2') { ?>
+            
+            <h1>Foglalás módosítása</h1>
+        <div class="main-content">
+        <?php
+        $formerror = 0;
+        $message="";
+        $guestid = $_POST["guestid"];
+        $bookingid=$_POST["bookingid"];
+        if (!checkIsAValidDate($_POST['beginning'])) {
+            $formerror=1;
+            $message="A kezdő dátumnak érvényesnek kell lennie! " . "<br>";
+        }
+        if (!checkIsAValidDate($_POST['end'])) {
+            $formerror=1;
+            $message=$message."A vég dátumnak érvényesnek kell lennie!";
+        }
+        if($formerror) {
+            echo $message; ?>
+            <p> Kérem adja meg a foglalás kezdeti és végpontját!</p>
+            <form action="booking.php" method="post"> 
+                <label for="beginning">A foglalás kezdete</label><br> 
+                <input type="text" name="beginning" value="<?php echo $_POST['beginning']; ?>"> <br>
+                <label for="end"></label>A foglalás vége<br>
+                <input type="text" name="end" value="<?php echo $_POST['end']; ?>"><br>
+                <input type=hidden name="action" value="edit2">
+                <input type=hidden name="guestid" value=<?php echo $guestid ?>>
+                <input type=hidden name="bookingid" value=<?php echo $bookingid; ?>>
+                <button type="submit" value="submit">Tovább</button>
+            </form> 
+        <?php
+        } else { ?>
+            <p> A foglalás időpontja:
+            <?php
+            echo $_POST['beginning'] . "-tól " . $_POST['end'] . "-ig";
+            ?> </p>
+            <p> A vendég: <?php 
+
+            $guestid=$_POST["guestid"];
+            $bookingid=$_POST["bookingid"];
+            $query = "select * from guest where id=". $guestid; 
+            $result = mysqli_query($link,$query) or die(mysqli_error($link));
+            $row = mysqli_fetch_assoc($result);
+            echo $row['name'];
+            
+            ?> </p>
+            <form action="booking.php" method="post">
+            <label for="rooms"> Válassza ki a szobát </label>
+            <select name="rooms">
+            <?php 
+            $query = "select id, roomnr from room where id not in (select room_id from booking where (('". $_POST['beginning'] . "' >= beginning 
+            AND '". $_POST['beginning'] . "'< end ) OR ('". $_POST['end'] . "' > beginning
+            AND '" . $_POST['end'] . "'<=end)) AND id !=". $bookingid .")";
+            $result = mysqli_query($link,$query) or die(mysqli_error($link));
+            for ($i=0; $row=mysqli_fetch_assoc($result); $i++) {
+                echo"<option value=\"". $row['id'] . "\">". $row['roomnr'] . "</option>";
+                }
+                ?>
+            </select> <br>
+            <input type="hidden" name="action" value="modify">
+            <input type="hidden" name="beginning" value="<?php echo $_POST['beginning']?>">
+            <input type="hidden" name="end" value="<?php echo $_POST['end']?>">
+            <input type=hidden name="bookingid" value=<?php echo $_POST['bookingid']; ?>>
+            <button type="submit" value="submit">Megerősítés</button>
+            </form>
+            </div>
+        <?php } 
+         } else if (isset($_POST['action']) && $_POST['action'] == 'modify') { ?>
+        <?php
+        $query="update booking set beginning='" . $_POST['beginning'] . "',end='". $_POST['end'] ."',room_id=". $_POST['rooms'] ." where id=" . $_POST['bookingid'];
+        $result = mysqli_query($link, $query) or die(mysqli_error($link));
+        header('Location: http://' . $_SERVER['SERVER_NAME'] . '/hotelman/booking.php?action=list');
+        ?>
         <?php } else if (isset($_GET['action']) && $_GET['action'] == 'delete') ?>
         </div>
         </div>
