@@ -275,7 +275,27 @@ function checkIsAValidDate($myDateString){
         $result = mysqli_query($link, $query) or die(mysqli_error($link));
         header('Location: http://' . $_SERVER['SERVER_NAME'] . '/hotelman/booking.php?action=list');
         ?>
-        <?php } else if (isset($_GET['action']) && $_GET['action'] == 'delete') ?>
+        <?php }else if (isset($_GET['action']) && $_GET['action'] == 'delete')  { ?>
+
+        <h1>Foglalás törlése</h1>
+        <div class="main-content">
+        <?php $bookingid=$_GET["id"]?>
+        <p><?php echo "A " . $bookingid . " azonosítójú foglalás törölve lesz!" ?></p>
+        <form action="booking.php" method="POST"> 
+            <input type="hidden" name="bookingid" value=<?php echo $bookingid;?>>
+            <input type="hidden" name="action" value="delete">
+            <button type="submit" value="submit">Foglalás törlése</button>
+        </form>
+        <a href="booking.php?action=list"> Mégsem </a>
+
+       <?php } else if (isset($_POST['action']) && $_POST['action'] == 'delete') {
+        
+        $bookingid=$_POST['bookingid'];
+        $query="DELETE from booking WHERE id=" . $bookingid;
+        $result=mysqli_query($link,$query) or die(mysqli_error($link));
+        header('Location: http://' . $_SERVER['SERVER_NAME'] . '/hotelman/booking.php?action=list');
+       }
+        ?>
         </div>
         </div>
     </body>    
