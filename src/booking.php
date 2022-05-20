@@ -4,7 +4,7 @@ function checkIsAValidDate($myDateString){
 }
 ?>
 
-<!DOCTYPE htlm>
+<!DOCTYPE html>
 <html>
     <head>
         <link rel="stylesheet" href="hotelman.css"> 
@@ -188,6 +188,7 @@ function checkIsAValidDate($myDateString){
             $guestid=$row["guest_id"];
             $beginning = $row["beginning"];
             $end = $row["end"];
+            $roomid=$row["room_id"];
 
             ?>
             
@@ -199,6 +200,7 @@ function checkIsAValidDate($myDateString){
                 <input type=hidden name="action" value="edit2">
                 <input type=hidden name="guestid" value=<?php echo $guestid; ?>>
                 <input type=hidden name="bookingid" value=<?php echo $bookingid; ?>>
+                <input type=hidden name="room_id" value=<?php echo $roomid; ?>>
                 <button type="submit" value="submit">Tovább</button>
             </form> 
             </div>
@@ -236,6 +238,7 @@ function checkIsAValidDate($myDateString){
                 <input type=hidden name="action" value="edit2">
                 <input type=hidden name="guestid" value=<?php echo $guestid ?>>
                 <input type=hidden name="bookingid" value=<?php echo $bookingid; ?>>
+                <input type=hidden name="bookingid" value=<?php echo $_POST['room_id']; ?>>
                 <button type="submit" value="submit">Tovább</button>
             </form> 
         <?php
@@ -263,7 +266,9 @@ function checkIsAValidDate($myDateString){
             AND '" . $_POST['end'] . "'<=end)) AND id !=". $bookingid .")";
             $result = mysqli_query($link,$query) or die(mysqli_error($link));
             for ($i=0; $row=mysqli_fetch_assoc($result); $i++) {
-                echo"<option value=\"". $row['id'] . "\">". $row['roomnr'] . "</option>";
+                if($row['id'] == $_POST['room_id'])
+                {echo"<option value=\"". $row['id'] . "\"selected>". $row['roomnr'] . "</option>";}
+                else {echo"<option value=\"". $row['id'] . "\">". $row['roomnr'] . "</option>";}
                 }
                 ?>
             </select> <br>
