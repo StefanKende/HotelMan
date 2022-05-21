@@ -1,15 +1,16 @@
 <!DOCTYPE html>
+<?php include 'hmsession.php'?>
 <html>
     <head>
-        <link rel="stylesheet" href="hotelman.css"> 
+        
+        <link rel="stylesheet" href="<?php echo $_SESSION['cssfile']; ?>"> 
         <title>Vendégek</title>
     </head>
     <body>
-         <?php include 'menu.html' ?>
-         <?php include 'settings.php'?>
-         
+        <?php include 'menu.php'?>
+        <?php include 'settings.php'?>         
         <div class="main">
-
+        <?php $hasaccess = ($_SESSION['role'] == 'superuser') || ($_SESSION['role'] == 'receptionist')?>
             <?php 
             //===================================================================
             // Összes vendég listázása
@@ -17,11 +18,14 @@
             if ( isset($_GET["action"]) && $_GET['action'] == 'list') { ?>
             <h1> Vendégek </h1>
             <div class="main-content">
-
+            <?php if ($hasaccess) { ?>
+            <p>
             <form action="guest.php" method="post">
                 <input type="hidden" name="action" value="new">
                 <button type="submit" value="submit">Új vendég felvétele</button>
             </form>
+            </p>
+            <?php } ?>
 
             <table> 
                 <tr>
@@ -29,7 +33,7 @@
                     <th>Vendég neve </th>
                     <th>Vendég telefonszáma</th>
                     <th>Vendég e-mail címe</th>
-                    <th>Műveletek</th>
+                    <?php if ($hasaccess) echo "<th>Műveletek</th>"; ?>
                 </tr>
 
                 <?php
@@ -39,10 +43,12 @@
             
             for ($i=0; $row=mysqli_fetch_assoc($result); $i++) {
                 echo "<tr><td>" . $row["id"] . "</td><td>" . $row["name"] . 
-                "</td><td>" . $row["phone_number"] . "</td><td>" . $row["email"] . "</td>
-                <td><a href=\"guest.php?action=edit&id=" . $row["id"] . "\">Szerkesztés</a> 
-                <a href=\"guest.php?action=delete&id="
-                . $row["id"] . "\">Törlés </a></td></tr>";
+                "</td><td>" . $row["phone_number"] . "</td><td>" . $row["email"] . "</td>";
+                if ($hasaccess) {
+                    echo "<td><a href=\"guest.php?action=edit&id=" . $row["id"] . "\">Szerkesztés</a> 
+                         <a href=\"guest.php?action=delete&id=". $row["id"] . "\">Törlés </a></td>";
+                }
+                echo "</tr>";
             }
             ?>
                 

@@ -1,11 +1,12 @@
-<!DOCTYPE htlm>
+<!DOCTYPE html>
+<?php include 'hmsession.php'?>
 <html>
     <head>
-        <link rel="stylesheet" href="hotelman.css">
+        <link rel="stylesheet" href="<?php echo $_SESSION['cssfile'];?>">
         <title>Hotelman</title>
     </head>
     <body>
-        <?php include 'menu.html' ?>
+        <?php include 'menu.php' ?>
 
         <div class="main">
             <h1> Hotelman </h1>

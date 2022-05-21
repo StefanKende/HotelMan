@@ -1,15 +1,15 @@
 <!DOCTYPE html>
+<?php include 'hmsession.php'?>
 <html>
     <head>
-        <link rel="stylesheet" href="hotelman.css"> 
+        <link rel="stylesheet" href="<?php echo $_SESSION['cssfile']?>"> 
         <title>Szobák</title>
     </head>
     <body>
-        <?php include 'menu.html' ?>
+        <?php include 'menu.php' ?>
         <?php include 'settings.php'?>
-
         <div class="main">
-            <?php 
+            <?php
               //===================================================================
               // Main action list all rooms
               //=================================================================== 
@@ -18,13 +18,14 @@
             <h1> Szobák </h1>
             <div class="main-content">
 
+            <?php if ($_SESSION['role']=="superuser") { ?>
             <p>
             <form action="room.php" method="post">
                 <input type="hidden" name="action" value="new">
                 <button type="submit" value="submit">Új szoba felvétele</button>
             </form>
             </p>
-            
+            <?php } ?>
             <table> 
                 <tr>
                     <th>id</th>
@@ -33,7 +34,7 @@
                     <th>Férőhely</th>
                     <th>Extra</th>
                     <th>Kategória</th>
-                    <th>Műveletek</th>
+                    <?php if ($_SESSION['role']=="superuser") echo "<th>Műveletek</th>"; ?>
                 </tr>
 
             <?php
@@ -44,8 +45,13 @@
             for ($i=0; $row=mysqli_fetch_assoc($result); $i++) {
                 echo "<tr><td>" . $row["id"] . "</td><td>" . $row["roomnr"] . 
                 "</td><td>" . $row["price"] . "</td><td>" . $row["nr_guests"] . 
-                "</td><td>" . $row["extra"] . "</td><td>" . $row["category"] . "</td>
-                <td><a href=\"room.php?action=edit&id=" . $row["id"] . "\">Szerkesztés</a> <a href=\"room.php?action=delete&id=". $row["id"] . "\">Törlés </a></td></tr>";
+                "</td><td>" . $row["extra"] . "</td><td>" . $row["category"] . "</td>";
+                if ($_SESSION['role']=="superuser") {
+                  echo "<td><a href=\"room.php?action=edit&id=" . $row["id"] .
+                       "\">Szerkesztés</a> <a href=\"room.php?action=delete&id=". $row["id"] .
+                       "\">Törlés </a></td>";
+                }
+                echo "</tr>";
             }
             ?>
             </table>

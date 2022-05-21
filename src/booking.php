@@ -5,27 +5,30 @@ function checkIsAValidDate($myDateString){
 ?>
 
 <!DOCTYPE html>
+<?php include 'hmsession.php'?>
 <html>
     <head>
-        <link rel="stylesheet" href="hotelman.css"> 
+        <link rel="stylesheet" href=" <?php echo $_SESSION['cssfile']; ?> "> 
         <title>Foglalások</title>
     </head>
     <body>
-        <?php include 'menu.html' ?>
+        <?php include 'menu.php' ?>
         <?php include 'settings.php' ?>
         <div class="main">
-
+        <?php $hasaccess = ($_SESSION['role'] == 'superuser') || ($_SESSION['role'] == 'receptionist')?>
         <?php if (isset($_GET['action']) && $_GET['action'] == 'list') {
         ?>
         <h1> Foglalások </h1>
         <div class="main-content">
         
-        <p>
-            <form action="booking.php" method="post">
+        <?php if ($hasaccess) { ?>
+            <p>
+                <form action="booking.php" method="post">
                 <input type="hidden" name="action" value="new">
                 <button type="submit" value="submit">Új foglalás felvétele</button>
-            </form>
-        </p>
+                </form>
+            </p>
+        <?php } ?>
 
         <table> 
                 <tr>
@@ -36,7 +39,7 @@ function checkIsAValidDate($myDateString){
                     <th>Vendég neve</th>
                     <th>Vendég telefonszáma</th>
                     <th>Szobaszám</th>
-                    <th>Műveletek</th>
+                    <?php if ($hasaccess) echo "<th>Műveletek</th>"; ?>
                 </tr>
                 <?php $query = "select booking.id, booking.price, booking.beginning, 
                 booking.end, guest.name, guest.phone_number,room.roomnr
@@ -49,10 +52,14 @@ function checkIsAValidDate($myDateString){
                 echo "<tr><td>" . $row["id"] . "</td><td>" . $row["price"] . 
                 "</td><td>" . $row["beginning"] . "</td><td>" . $row["end"] . 
                 "</td><td>" . $row["name"] . "</td><td>" . $row["phone_number"] . "</td>" .
-                "<td>" . $row["roomnr"] . "</td>" .
-                "<td><a href=\"booking.php?action=edit&id=" . $row["id"] . "\">Szerkesztés</a>" . 
-                "<a href=\"booking.php?action=delete&id=". $row["id"] . "\"> Törlés </a>" . 
-                "<a href=\"booking.php?action=checkout&id=" . $row["id"] . "\">Kijelentkezés</a></td></tr>";
+                "<td>" . $row["roomnr"] . "</td>";
+                if ($hasaccess) {
+                    echo "<td><a href=\"booking.php?action=edit&id=" . $row["id"] . "\">Szerkesztés</a>" . 
+                         "<a href=\"booking.php?action=delete&id=". $row["id"] . "\"> Törlés </a>" . 
+                         "<a href=\"booking.php?action=checkout&id=" . $row["id"] . 
+                         "\">Kijelentkezés</a></td>";
+                }
+                echo "</tr>";
             } ?>
             </table>
 
