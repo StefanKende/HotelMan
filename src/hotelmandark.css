@@ -1,13 +1,14 @@
 body {
-  background-color:black;
   font-family: helvetica, sans-serif;
   margin: 0px;
+  margin-left:6px;
 }
 
 h1 {
-  background-color: rgb(75, 67, 227);
+  background-color: rgb(25, 18, 168);
   color: #ffffff;
   width: 100%;
+  padding-left:10px;  
   padding-top: 10px;
   padding-bottom: 10px;
   margin-top: 0px;
@@ -28,9 +29,10 @@ h1 {
     z-index: 1;
     top: 0;
     left: 0;
-    background-color: rgb(75, 67, 227);
+    background-color: rgb(25, 18, 168);
     overflow-x: hidden;
     padding-top: 20px;
+    border-right: 6px solid #0f0685;
   }
 
   .sidenav a {
@@ -50,6 +52,52 @@ h1 {
 
   .main-content {
     padding-left: 20px;
+  }
+
+  .formcss {
+    background-color:#ffffff;
+    text-align: center;
+    margin: auto;
+    width: 20%;
+    height:32%;
+    padding: 10px;
+    box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+    border-radius: 10px;
+
+
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .formcss2 {
+    background-color:#ffffff;
+    text-align:center;
+    width: 20%;
+    height:32%;
+    padding:10px;
+    box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+    border-radius: 10px;
+  }
+
+  input {
+    border:0;
+    outline:0;
+    margin-bottom:40px;
+    border-bottom: 3px solid #d7d7d7;
+  }
+
+  button {
+    border:none;
+    background-color: rgb(25, 18, 168);
+    color:white;
+    padding:10px 20px 10px 20px;
+    border-radius:6px;
+  }
+
+  input:focus {
+    outline:none!important;
   }
 
   table { 
