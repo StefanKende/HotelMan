@@ -9,7 +9,7 @@ A cél az, hogy nyomon tudjuk követni, hogy éppen melyik szoba van szabadon, v
     - Meglévő szoba adatainak módosítása
     - Szoba törlése
     - Szobák listázása
-    - Foglaltsági naptár, egy szoba adott havi foglaltság kijelzése
+    - Foglaltsági naptár, egy szoba adott foglalásainak kijelzése
     - Szabad szoba keresése megadott dátumintervallumra
 
 - Vendégek kezelése (/guest.php) :
