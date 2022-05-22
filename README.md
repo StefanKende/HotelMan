@@ -22,7 +22,7 @@ A cél az, hogy nyomon tudjuk követni, hogy éppen melyik szoba van szabadon, v
     - Új foglalás felvétele
     - Foglalás törlése
     - Foglalás módosítása
-    - Meglévő foglalások listázása:
+    - Meglévő foglalások listázása
     - Kijelentkezés
     
 # Adatbázis séma
