@@ -19,6 +19,7 @@ A cél az, hogy nyomon tudjuk követni, hogy éppen melyik szoba van szabadon, v
     - A vendégek listázása
 
 - Foglalások kezelése (/booking.php) :
+    - Meglévő foglalások listázása:
     - Új foglalás felvétele
     - Foglalás törlése
     - Foglalás módosítása
